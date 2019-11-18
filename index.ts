@@ -230,7 +230,40 @@ class Clock1 implements ClockInterface1 {
     constructor(h: number, m: number) { }
 }
 
-//3.10 
+//4.0 Symbols - is a primitive data type just like number and string introduced in ECMAScript 2015.
+//symbol values are created by calling Symbol Constructor
+let sym1 = Symbol();
+let sym2 = Symbol("key"); // optional string key
+
+let sym4 = Symbol("key");
+let sym3 = Symbol("key");
+console.log(sym4 === sym3); // false, symbols are unique and immutable
+
+//4.1 Symbol can be sued as key for object properties
+const sym = Symbol();
+let obj = {
+    [sym]: "value"
+};
+console.log(obj[sym]); // "value"
+
+//4.2 Symbols can also be combined with computed property declarations to declare object properties and class members.
+
+const getClassNameSymbol = Symbol();
+console.log(getClassNameSymbol);
+class C {
+    [getClassNameSymbol](){
+       return "C";
+    }
+}
+
+let c1 = new C();
+let className = c1[getClassNameSymbol]();
+console.log(className);
+
+//4.3 
+
+
+
 
 
 
