@@ -128,6 +128,110 @@ console.log(typeof(strLength));
 /* ------------------------------------------------------------------ */
 
 //3.0 Interfaces and classes
+interface LabeledValue {
+    label: string;
+}
+function printLabel(labeledObj: LabeledValue) {
+    console.log(labeledObj.label);
+}
+let myObj = {size: 10, label: "Size 10 Object"};
+printLabel(myObj);
+//3.1 Interface optional properties
+interface SquareConfig {
+    color?: string;
+    width?: number;
+}
+function createSquare(config: SquareConfig): {color: string; area: number} {
+    let newSquare = {color: "white", area: 100};
+    if (config.color) {
+        newSquare.color = config.color;
+    }
+    if (config.width) {
+        newSquare.area = config.width * config.width;
+    }
+    return newSquare;
+}
+//let mySquare = createSquare({color: "black"});
+//let mySquare = createSquare({color: "black", width: 5});
+//type assertion
+let mySquare = createSquare({color: "black", width: 5} as SquareConfig);
+console.log(mySquare);
+//3.2 Interfaces Readonly properties : Some properties should only be modifiable when an object is first created. You can specify this by putting readonly before the name of the property
+interface Point {
+    readonly x: number;
+    readonly y: number;
+}
+let p1: Point = { x: 10, y: 20 };
+console.log(p1.x);
+//p1.x = 5;
+
+//3.3 Mutable array - ReadonlyArray<T>
+let a: number[] = [1, 2, 3, 4];
+let ro: ReadonlyArray<number> = a;
+//ro[0] = 12; // error!
+//ro.push(5); // error!
+//ro.length = 100; // error!
+//a = ro; // error!
+//a = ro as number[];
+//ro.push(5);
+
+//3.4 Interfcaes with Function types
+interface SearchFunc {
+    (source: string, subString: string): boolean;
+}
+let mySearch: SearchFunc;
+mySearch = function(src, sub) {
+    let result = src.search(sub);
+    return result > -1;
+}
+
+//3.5 Interfaces with Indexable types
+interface StringArray {
+    [index: number]: string;
+    //[index: number]: string | number;
+}
+let myArray: StringArray;
+myArray = ["Bob", "Fred"];
+let myStr: string = myArray[0];
+console.log(myStr);
+
+//3.6 union of property types
+interface StringArray1 {
+    [index: number]: string | number;
+}
+
+//3.7 prevent from re-assignment
+interface StringArray2 {
+    readonly [index: number]: string | number;
+}
+
+//3.8  Class with an Interfcae
+
+interface ClockInterface {
+    currentTime: Date;
+}
+
+class Clock implements ClockInterface {
+    currentTime: Date = new Date();
+    constructor(h: number, m: number) { }
+}
+
+//3.9 Methods(functions) in an interface
+interface ClockInterface1 {
+    currentTime: Date;
+    setTime(d: Date): void;
+}
+
+class Clock1 implements ClockInterface1 {
+    currentTime: Date = new Date();
+    setTime(d: Date) {
+        this.currentTime = d;
+    }
+    constructor(h: number, m: number) { }
+}
+
+//3.10 
+
 
 
 
