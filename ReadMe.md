@@ -27,5 +27,35 @@ TypeScript Topics :
   Atom 
   Webstorm
 7. Download and install from http://code.visualstudiocode.com.
-8. 
+
+--------------------------------------------------
+tsconfig.json
+
+1. tsconfig.json - is the root of typescript project.
+It provides an options for compiler to compile the typescript project.
+{
+    "compilerOptions": {
+        "module": "system",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outFile": "../../built/local/tsc.js",
+        "sourceMap": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ],
+    "files": [
+        "core.ts",
+        "sys.ts",
+        "types.ts",
+        "scanner.ts",
+    ]
+}
+
+* matches zero or more characters
 
