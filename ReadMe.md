@@ -59,3 +59,8 @@ It provides an options for compiler to compile the typescript project.
 
 * matches zero or more characters
 
+---------------------------------------------------------------
+
+4.0 namespaces: are previously refered as internal node_modules
+
+

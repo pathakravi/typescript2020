@@ -260,14 +260,94 @@ let c1 = new C();
 let className = c1[getClassNameSymbol]();
 console.log(className);
 
-//4.3 
+//4.3 namespaces
+interface StringValidator {
+    isAcceptable(s: string): boolean;
+}
+
+let lettersRegexp = /^[A-Za-z]+$/;
+let numberRegexp = /^[0-9]+$/;
+
+class LettersOnlyValidator implements StringValidator {
+    isAcceptable(s: string) {
+        return lettersRegexp.test(s);
+    }
+}
+
+class ZipCodeValidator implements StringValidator {
+    isAcceptable(s: string) {
+        return s.length === 5 && numberRegexp.test(s);
+    }
+}
+
+// Some samples to try
+let strings = ["Hello", "98052", "101"];
+
+// Validators to use
+let validators: { [s: string]: StringValidator; } = {};
+validators["ZIP code"] = new ZipCodeValidator();
+validators["Letters only"] = new LettersOnlyValidator();
+
+// Show whether each string passed each validator
+for (let s of strings) {
+    for (let name in validators) {
+        let isMatch = validators[name].isAcceptable(s);
+        console.log(`'${ s }' ${ isMatch ? "matches" : "does not match" } '${ name }'.`);
+    }
+}
 
 
+// other way round
+/// <reference path="Validation.ts" />
+/// <reference path="LettersOnlyValidator.ts" />
+/// <reference path="ZipCodeValidator.ts" />
 
+//5.0 Type Compatibility in TypeScript
+//Its is based on Structural Typing - Structural typing is a way of relating types based solely on their members. Since both Named and Person has same type as name, so its fine to work.
+interface Named {
+    name: string;
+}
+class Person {
+    name: string;
+}
+let p: Named;
+// OK, because of structural typing
+p = new Person();
 
+//Example : members of target type name is present, so it will not throw an error
+interface Named1 {
+    name: string;
+}
+let x: Named1;
+// y's inferred type is { name: string; location: string; }
+let y = { name: "Alice", location: "Seattle" };
+x = y;
+function greet(n: Named) {
+    console.log("Hello, " + n.name);
+}
+greet(x);
 
+//Comparing two functions
+let x11 = (a: number) => 0;
+let y1 = (b: number, s: string) => 0;
+y1=x11 // OK, every property of x11 is present in y1
+//x11=y1 // Error, every property of y1 is not present in x11
 
+//Function with overloads
+//Enum : Enum values from different Enum are consideeed as incompatible
 
+enum Status { Ready, Waiting };
+enum Color { Violet, Brown, Magenta };
+let status = Status.Ready;
+//status = Color.Green;  // Error
 
+//6.0 Iterators
+//Iterators : An object is considred iterable if it has implementation of Symbol.iterator property. Symbol.iterator function on an object is responsible for returning the list of values to iterate on. Built in types are : Array, Map, Set, String, Int32Array, Uint32Array
 
+//for..in : iterates over the list and returns the list of keys on an Object.
 
+//for..of : iterates over the list and returns the list of values of an object.
+
+//7.0 Modules : Internal modules are called modules.
+
+//8.0 Namespaces : external modules are called namespaces.
