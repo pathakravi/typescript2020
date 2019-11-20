@@ -348,6 +348,19 @@ let status = Status.Ready;
 
 //for..of : iterates over the list and returns the list of values of an object.
 
-//7.0 Modules : Internal modules are called modules.
+//7.0 Modules : Enternal modules are called modules.
+//In TypeScript, just as in ECMAScript 2015, any file containing a top-level import or export is considered a module. Conversely, a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well)
 
-//8.0 Namespaces : external modules are called namespaces.
+/*import { StringValidator } from "./namespaces/StringValidator";
+export const numberRegexp = /^[0-9]+$/;
+
+export class ZipCodeValidator implements StringValidator {
+    isAcceptable(s: string) {
+        return s.length === 5 && numberRegexp.test(s);
+    }
+}*/
+
+//7.1 export original module and but rename it :
+//export {ZipCodeValidator as RegExpBasedZipCodeValidator} from "./ZipCodeValidator";
+
+//8.0 Namespaces : Internal modules are called namespaces.
