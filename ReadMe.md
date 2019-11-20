@@ -28,7 +28,7 @@ TypeScript Topics :
   Webstorm
 7. Download and install from http://code.visualstudiocode.com.
 
---------------------------------------------------
+--------------------------------------------------------
 tsconfig.json
 
 1. tsconfig.json - is the root of typescript project.
