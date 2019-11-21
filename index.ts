@@ -400,4 +400,18 @@ var TestSum;
 //Compile above code : tsc main.ts
 //Run above code : node main.js
 
-11.
+//11.0 Generics - TypeScript Generics is a tool which provides a way to create reusable components. It creates a component that can work with a variety of data types rather than a single data type. It allows users to consume these components and use their own types. Generics ensures that the program is flexible as well as scalable in the long term
+
+function identity<T>(arg: T): T {    
+    return arg;    
+}    
+let output1 = identity<string>("myString");    
+let output2 = identity<number>( 100 );  
+console.log('Generics example 1 : '+output1);  
+console.log('Generics example 2 : '+output2);
+
+//11.1 Multi type variables
+function displayDataType<T, U>(id:T, name:U): void {   
+  console.log("DataType of Id: "+typeof(id) + "\nDataType of Name: "+ typeof(name));    
+}  
+displayDataType<number, string>(101, "Abhishek")
