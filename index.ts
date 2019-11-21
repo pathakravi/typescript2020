@@ -230,7 +230,7 @@ class Clock1 implements ClockInterface1 {
     constructor(h: number, m: number) { }
 }
 
-//4.0 Symbols - is a primitive data type just like number and string introduced in ECMAScript 2015.
+//4.0 Symbols - is a primitive data type just like number and string introduced in ECMAScript 2015 or ES6 .
 //symbol values are created by calling Symbol Constructor
 let sym1 = Symbol();
 let sym2 = Symbol("key"); // optional string key
