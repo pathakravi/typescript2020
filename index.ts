@@ -364,3 +364,6 @@ export class ZipCodeValidator implements StringValidator {
 //export {ZipCodeValidator as RegExpBasedZipCodeValidator} from "./ZipCodeValidator";
 
 //8.0 Namespaces : Internal modules are called namespaces.
+
+
+//9.0 Decorators : A Decorator is a special kind of declaration that can be applied to classes, methods, accessor, property, or parameter. Decorators are simply functions that are prefixed @expression symbol
