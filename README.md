@@ -118,4 +118,11 @@ for (let s of strings) {
     }
 }
 
+13. Generics
+There are mainly three advantages of generics. They are as follows:
+
+Type-safety: We can hold only a single type of objects in generics. It doesn't allow to store other objects.
+Typecasting is not required: There is no need to typecast the object.
+Compile-Time Checking: It is checked at compile time so the problem will not occur at runtime.
+
 
