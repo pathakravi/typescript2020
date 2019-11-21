@@ -38,11 +38,8 @@ TypeScript does not support abstract classes
 10. Interest oover time :
 https://www.guru99.com/typescript-vs-javascript.html
 
-
---------------------------------------------------------
-tsconfig.json
-
-1. tsconfig.json - is the root of typescript project.
+11. tsconfig.json
+tsconfig.json - is the root of typescript project.
 It provides an options for compiler to compile the typescript project.
 {
     "compilerOptions": {
@@ -70,8 +67,55 @@ It provides an options for compiler to compile the typescript project.
 
 * matches zero or more characters
 
----------------------------------------------------------------
+12. Namespaces
+File : Validation.ts
+namespace Validation {
+    export interface StringValidator {
+        isAcceptable(s: string): boolean;
+    }
+}
 
-4.0 namespaces: are previously refered as internal node_modules
+File : LettersOnlyValidator.ts
+/// <reference path="Validation.ts" />
+namespace Validation {
+    const lettersRegexp = /^[A-Za-z]+$/;
+    export class LettersOnlyValidator implements StringValidator {
+        isAcceptable(s: string) {
+            return lettersRegexp.test(s);
+        }
+    }
+}
+
+File : ZipCodeValidator.ts
+/// <reference path="Validation.ts" />
+namespace Validation {
+    const numberRegexp = /^[0-9]+$/;
+    export class ZipCodeValidator implements StringValidator {
+        isAcceptable(s: string) {
+            return s.length === 5 && numberRegexp.test(s);
+        }
+    }
+}
+
+
+File : Test.ts
+/// <reference path="Validation.ts" />
+/// <reference path="LettersOnlyValidator.ts" />
+/// <reference path="ZipCodeValidator.ts" />
+
+// Some samples to try
+let strings = ["Hello", "98052", "101"];
+
+// Validators to use
+let validators: { [s: string]: Validation.StringValidator; } = {};
+validators["ZIP code"] = new Validation.ZipCodeValidator();
+validators["Letters only"] = new Validation.LettersOnlyValidator();
+
+// Show whether each string passed each validator
+for (let s of strings) {
+    for (let name in validators) {
+        console.log(`"${ s }" - ${ validators[name].isAcceptable(s) ? "matches" : "does not match" } ${ name }`);
+    }
+}
 
 
