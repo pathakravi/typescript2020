@@ -386,16 +386,16 @@ var TestSum;
 })
 
 //CalcSum.d.ts : Above is a JS file and we have not much time to re-write this library to TypeScript. But still, if we need to use the doSum() function with type safety
-declare module TestSum1 {   
+/* declare module TestSum1 {   
    export class Calc {   
       doSum(a:number, b:number) : number;   
    }  
-}
+} */
 
 //Main.ts
 /// <reference path = "CalcSum.d.ts" />   
-var obj11 = new TestSum.Calc();   
-console.log("Sum: " +obj.doSum(15,25)); 
+//var obj11 = new TestSum.Calc();   
+//console.log("Sum: " +obj.doSum(15,25)); 
 
 //Compile above code : tsc main.ts
 //Run above code : node main.js
