@@ -367,3 +367,37 @@ export class ZipCodeValidator implements StringValidator {
 //The namespace is a way which is used for logical grouping of functionalities. It encapsulates the features and objects that share common relationships. It allows us to organize our code in a much cleaner way.
 
 //9.0 Decorators : A Decorator is a special kind of declaration that can be applied to classes, methods, accessor, property, or parameter. Decorators are simply functions that are prefixed @expression symbol
+
+//10.0 Ambients : 
+//Ambient declarations files need to save with the extension (d.ts).
+//A file with extension .d.ts must have the declare keyword prefixed to each root level definition.
+//The Ambient declarations allow us to use existing popular JavaScript libraries safely.
+
+//Additon.js //function of some library
+var TestSum;    
+(function (TestSum) {    
+   var Calc = (function () {   
+      function Calc() {   
+      }   
+      Calc.prototype.doSum = function (a, b) {  
+         return a + b;  
+      }  
+   })  
+})
+
+//CalcSum.d.ts : Above is a JS file and we have not much time to re-write this library to TypeScript. But still, if we need to use the doSum() function with type safety
+declare module TestSum1 {   
+   export class Calc {   
+      doSum(a:number, b:number) : number;   
+   }  
+}
+
+//Main.ts
+/// <reference path = "CalcSum.d.ts" />   
+var obj11 = new TestSum.Calc();   
+console.log("Sum: " +obj.doSum(15,25)); 
+
+//Compile above code : tsc main.ts
+//Run above code : node main.js
+
+11.
