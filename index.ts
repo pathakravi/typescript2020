@@ -127,12 +127,13 @@ console.log(typeof(strLength));
 
 /* ------------------------------------------------------------------ */
 
-//3.0 Interfaces and classes
+//3.0 Interfaces : An Interface is a structure which acts as a contract in our application. It defines the syntax for classes to follow, means a class which implements an interface is bound to implement all its members. 
 interface LabeledValue {
     label: string;
 }
 function printLabel(labeledObj: LabeledValue) {
-    console.log(labeledObj.label);
+    console.log('Interface Example 1'+labeledObj.label);
+    //console.log('Interface Example 2'+labeledObj.size);
 }
 let myObj = {size: 10, label: "Size 10 Object"};
 printLabel(myObj);
@@ -156,7 +157,7 @@ function createSquare(config: SquareConfig): {color: string; area: number} {
 //type assertion
 let mySquare = createSquare({color: "black", width: 5} as SquareConfig);
 console.log(mySquare);
-//3.2 Interfaces Readonly properties : Some properties should only be modifiable when an object is first created. You can specify this by putting readonly before the name of the property
+//3.2 Interfaces Readonly properties : Some properties should only be modifiable when an object is first created. You can specify this by putting readonly before the name of the property. The interface contains only the declaration of the methods and fields, but not the implementation.
 interface Point {
     readonly x: number;
     readonly y: number;
@@ -200,7 +201,7 @@ interface StringArray1 {
     [index: number]: string | number;
 }
 
-//3.7 prevent from re-assignment
+//3.7 readonly - prevent from re-assignment
 interface StringArray2 {
     readonly [index: number]: string | number;
 }
@@ -347,6 +348,15 @@ let status = Status.Ready;
 //for..in : iterates over the list and returns the list of keys on an Object.
 
 //for..of : iterates over the list and returns the list of values of an object.
+let list = [11, 12, 13];
+
+for (let i in list) {
+    console.log('For In Example : '+i); // "0", "1", "2",
+}
+
+for (let i of list) {
+    console.log('For Of Example '+i); // "4", "5", "6"
+}
 
 //7.0 Modules : Enternal modules are called modules.
 //In TypeScript, just as in ECMAScript 2015, any file containing a top-level import or export is considered a module. Conversely, a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well)
@@ -368,6 +378,17 @@ export class ZipCodeValidator implements StringValidator {
 
 //9.0 Decorators : A Decorator is a special kind of declaration that can be applied to classes, methods, accessor, property, or parameter. Decorators are simply functions that are prefixed @expression symbol
 
+function f() {  
+    console.log("f(): evaluated");  
+    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {  
+        console.log("f(): called");  
+    }  
+}  
+  
+class Cafe {  
+    @f()  
+    method() {}  
+}
 //10.0 Ambients : 
 //Ambient declarations files need to save with the extension (d.ts).
 //A file with extension .d.ts must have the declare keyword prefixed to each root level definition.
