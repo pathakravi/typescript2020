@@ -52,7 +52,7 @@ console.log('Enum manully set value: '+d);
 // not sure of value mapped in Color
 enum Color2 {Red = 1, Green, Blue}
 let colorName: string = Color2[2];
-console.log(colorName);
+console.log('Enum not sure value : '+colorName);
 
 //1.5 Any  - opt out of type checking if values come from dynamic content such as third party libraries
 let notSure: any = 4;
@@ -123,6 +123,11 @@ console.log(typeof(strLength));
     //return b;
 })(true);
 
+//var example
+for (var i = 0; i < 10; i++) {
+    setTimeout(function() { console.log(i); }, 100 * i);
+}
+
 //2.3 const keyword - hold read only variable with a constant value that can never change.
 
 /* ------------------------------------------------------------------ */
@@ -153,9 +158,9 @@ function createSquare(config: SquareConfig): {color: string; area: number} {
     return newSquare;
 }
 //let mySquare = createSquare({color: "black"});
-//let mySquare = createSquare({color: "black", width: 5});
+let mySquare = createSquare({color: "black", width: 5});
 //type assertion
-let mySquare = createSquare({color: "black", width: 5} as SquareConfig);
+//let mySquare = createSquare({color: "black", width: 5} as SquareConfig);
 console.log(mySquare);
 //3.2 Interfaces Readonly properties : Some properties should only be modifiable when an object is first created. You can specify this by putting readonly before the name of the property. The interface contains only the declaration of the methods and fields, but not the implementation.
 interface Point {
@@ -360,6 +365,9 @@ for (let i of list) {
 
 //7.0 Modules : Enternal modules are called modules.
 //In TypeScript, just as in ECMAScript 2015, any file containing a top-level import or export is considered a module. Conversely, a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well)
+//We can compile the module by using the "--module" command.
+//In modules, we can re-export some of their features either using their original name or rename it.
+
 
 /*import { StringValidator } from "./namespaces/StringValidator";
 export const numberRegexp = /^[0-9]+$/;
@@ -375,6 +383,8 @@ export class ZipCodeValidator implements StringValidator {
 
 //8.0 Namespaces : Internal modules are called namespaces.
 //The namespace is a way which is used for logical grouping of functionalities. It encapsulates the features and objects that share common relationships. It allows us to organize our code in a much cleaner way.
+//We can compile the namespace by using the "--outFile" command.
+//In namespaces, we cannot re-export their features or rename it.
 
 //9.0 Decorators : A Decorator is a special kind of declaration that can be applied to classes, methods, accessor, property, or parameter. Decorators are simply functions that are prefixed @expression symbol
 
