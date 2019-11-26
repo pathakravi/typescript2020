@@ -466,8 +466,68 @@ printName(player);
 //-----------------------------------------------------------
 
 /* 12. Declaration Merging :
-In declaration merging compiler merges two seperate declarations declared with the same name into a single defintion.
+In declaration merging compiler merges two seperate declarations declared with the same name into a single defintion. The merged definitions has features of both original declarations. Any number of declarations  can be merged , its not limited to two.
+
+Types of declartions merging :
+12.1 Interface Merging
  */
+interface Box {
+    height: number;
+    width: number;
+}
+
+interface Box {
+    scale: number;
+}
+
+let box: Box = {height: 5, width: 6, scale: 10};
+
+/*
+Example 3: in the case of interface A merging with later interface A, the second interface will have a higher precedence than the first.
+interface Cloner {
+    clone(animal: Animal): Animal;
+}
+
+interface Cloner {
+    clone(animal: Sheep): Sheep;
+}
+
+interface Cloner {
+    clone(animal: Dog): Dog;
+    clone(animal: Cat): Cat;
+}
+Note : three interface merge into single creations
+interface Cloner {
+    clone(animal: Dog): Dog;
+    clone(animal: Cat): Cat;
+    clone(animal: Sheep): Sheep;
+    clone(animal: Animal): Animal;
+}
+*/
+
+/*
+12.2 Namespace merging
+namespace Emp {
+    export class Analyst { }
+}
+
+namespace Emp {
+    export interface developer { numofDevelopers: number; }
+    export class SAnalyst { }
+}
+
+namespace Emp {
+    export class Analyst { }
+    export interface developer { numofDevelopers: number; }
+    export class SAnalyst { }
+}
+*/
+
+/* 13.
+
+*/
+
+
 
 
 
