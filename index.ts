@@ -461,4 +461,14 @@ function printName<T extends Celebrity>(theInput: T): void {
 let player: Celebrity = {  
     name: 'Rohit Sharma', age: 30, profession: 'Cricket Player'  
 }  
-printName(player);   
+printName(player);
+
+//-----------------------------------------------------------
+
+/* 12. Declaration Merging :
+In declaration merging compiler merges two seperate declarations declared with the same name into a single defintion.
+ */
+
+
+
+
