@@ -66,6 +66,7 @@ It provides an options for compiler to compile the typescript project.
 }
 
 * matches zero or more characters
+/ : means directory or sub directory.
 
 12. Namespaces
 File : Validation.ts
