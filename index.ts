@@ -369,23 +369,23 @@ let box: Box = {height: 5, width: 6, scale: 10};
 /*
 Example 3: in the case of interface A merging with later interface A, the second interface will have a higher precedence than the first.
 interface Cloner {
-    clone(animal: Animal): Animal;
+    clone(animal: animal4): Animal;
 }
 
 interface Cloner {
-    clone(animal: Sheep): Sheep;
+    clone(animal: animal3): Sheep;
 }
 
 interface Cloner {
-    clone(animal: Dog): Dog;
-    clone(animal: Cat): Cat;
+    clone(animal: animal1): Dog;
+    clone(animal: animal2): Cat;
 }
 Note : three interface merge into single creations
 interface Cloner {
-    clone(animal: Dog): Dog;
-    clone(animal: Cat): Cat;
-    clone(animal: Sheep): Sheep;
-    clone(animal: Animal): Animal;
+    clone(animal: animal1): Dog;
+    clone(animal: animal2): Cat;
+    clone(animal: animal3): Sheep;
+    clone(animal: animal4): Animal;
 }
 */
 
