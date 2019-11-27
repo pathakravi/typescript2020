@@ -308,44 +308,6 @@ for (let s of strings) {
 /// <reference path="LettersOnlyValidator.ts" />
 /// <reference path="ZipCodeValidator.ts" />
 
-//5.0 Type Compatibility in TypeScript
-//Its is based on Structural Typing - Structural typing is a way of relating types based solely on their members. Since both Named and Person has same type as name, so its fine to work.
-interface Named {
-    name: string;
-}
-class Person {
-    name: string;
-}
-let p: Named;
-// OK, because of structural typing
-p = new Person();
-
-//Example : members of target type name is present, so it will not throw an error
-interface Named1 {
-    name: string;
-}
-let x: Named1;
-// y's inferred type is { name: string; location: string; }
-let y = { name: "Alice", location: "Seattle" };
-x = y;
-function greet(n: Named) {
-    console.log("Hello, " + n.name);
-}
-greet(x);
-
-//Comparing two functions
-let x11 = (a: number) => 0;
-let y1 = (b: number, s: string) => 0;
-y1=x11 // OK, every property of x11 is present in y1
-//x11=y1 // Error, every property of y1 is not present in x11
-
-//Function with overloads
-//Enum : Enum values from different Enum are consideeed as incompatible
-
-enum Status { Ready, Waiting };
-enum Color { Violet, Brown, Magenta };
-let status = Status.Ready;
-//status = Color.Green;  // Error
 
 //6.0 Iterators
 //Iterators : An object is considred iterable if it has implementation of Symbol.iterator property. Symbol.iterator function on an object is responsible for returning the list of values to iterate on. Built in types are : Array, Map, Set, String, Int32Array, Uint32Array
@@ -381,95 +343,17 @@ export class ZipCodeValidator implements StringValidator {
 //7.1 export original module and but rename it :
 //export {ZipCodeValidator as RegExpBasedZipCodeValidator} from "./ZipCodeValidator";
 
-//8.0 Namespaces : Internal modules are called namespaces.
-//The namespace is a way which is used for logical grouping of functionalities. It encapsulates the features and objects that share common relationships. It allows us to organize our code in a much cleaner way.
-//We can compile the namespace by using the "--outFile" command.
-//In namespaces, we cannot re-export their features or rename it.
 
-//9.0 Decorators : A Decorator is a special kind of declaration that can be applied to classes, methods, accessor, property, or parameter. Decorators are simply functions that are prefixed @expression symbol
-
-function f() {  
-    console.log("f(): evaluated");  
-    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {  
-        console.log("f(): called");  
-    }  
-}  
-  
-class Cafe {  
-    @f()  
-    method() {}  
-}
-//10.0 Ambients : 
-//Ambient declarations files need to save with the extension (d.ts).
-//A file with extension .d.ts must have the declare keyword prefixed to each root level definition.
-//The Ambient declarations allow us to use existing popular JavaScript libraries safely.
-
-//Additon.js //function of some library
-var TestSum;    
-(function (TestSum) {    
-   var Calc = (function () {   
-      function Calc() {   
-      }   
-      Calc.prototype.doSum = function (a, b) {  
-         return a + b;  
-      }  
-   })  
-})
-
-//CalcSum.d.ts : Above is a JS file and we have not much time to re-write this library to TypeScript. But still, if we need to use the doSum() function with type safety
-/* declare module TestSum1 {   
-   export class Calc {   
-      doSum(a:number, b:number) : number;   
-   }  
-} */
-
-//Main.ts
-/// <reference path = "CalcSum.d.ts" />   
-//var obj11 = new TestSum.Calc();   
-//console.log("Sum: " +obj.doSum(15,25)); 
-
-//Compile above code : tsc main.ts
-//Run above code : node main.js
-
-//11.0 Generics - TypeScript Generics is a tool which provides a way to create reusable components. It creates a component that can work with a variety of data types rather than a single data type. It allows users to consume these components and use their own types. Generics ensures that the program is flexible as well as scalable in the long term
-
-function identity<T>(arg: T): T {    
-    return arg;    
-}    
-let output1 = identity<string>("myString");    
-let output2 = identity<number>( 100 );  
-console.log('Generics example 1 : '+output1);  
-console.log('Generics example 2 : '+output2);
-
-//11.1 Multi type variables
-function displayDataType<T, U>(id:T, name:U): void {   
-  console.log("DataType of Id: "+typeof(id) + "\nDataType of Name: "+ typeof(name));    
-}  
-displayDataType<number, string>(101, "Abhishek")
-
-//11.2 The generic type can also be used with the interface.
-interface People {  
-    name: string  
-    age: number  
-}  
-interface Celebrity extends People {  
-    profession: string  
-}  
-function printName<T extends Celebrity>(theInput: T): void {  
-    console.log(`Name: ${theInput.name} \nAge: ${theInput.age} \nProfession: ${theInput.profession}`);  
-}  
-let player: Celebrity = {  
-    name: 'Rohit Sharma', age: 30, profession: 'Cricket Player'  
-}  
-printName(player);
 
 //-----------------------------------------------------------
 
-/* 12. Declaration Merging :
+// Training Session : Day 2
+
+/* 1. Declaration Merging :
 In declaration merging compiler merges two seperate declarations declared with the same name into a single defintion. The merged definitions has features of both original declarations. Any number of declarations  can be merged , its not limited to two.
 
 Types of declartions merging :
-12.1 Interface Merging
+1.1 Interface Merging
  */
 interface Box {
     height: number;
@@ -506,7 +390,7 @@ interface Cloner {
 */
 
 /*
-12.2 Namespace merging
+1.2 Namespace merging
 namespace Emp {
     export class Analyst { }
 }
@@ -523,7 +407,138 @@ namespace Emp {
 }
 */
 
-/* 13.
+/* 2.0 Generics - TypeScript Generics is a tool which provides a way to create reusable components. It creates a component that can work with a variety of data types rather than a single data type. It allows users to consume these components and use their own types. Generics ensures that the program is flexible as well as scalable in the long term
+
+function identity<T>(arg: T): T {    
+    return arg;    
+}    
+let output1 = identity<string>("myString");    
+let output2 = identity<number>( 100 );  
+console.log('Generics example 1 : '+output1);  
+console.log('Generics example 2 : '+output2);
+
+2.1 Multi type variables
+function displayDataType<T, U>(id:T, name:U): void {   
+  console.log("DataType of Id: "+typeof(id) + "\nDataType of Name: "+ typeof(name));    
+}  
+displayDataType<number, string>(101, "Abhishek")
+
+2.2 The generic type can also be used with the interface.
+interface People {  
+    name: string  
+    age: number  
+}  
+interface Celebrity extends People {  
+    profession: string  
+}  
+function printName<T extends Celebrity>(theInput: T): void {  
+    console.log(`Name: ${theInput.name} \nAge: ${theInput.age} \nProfession: ${theInput.profession}`);  
+}  
+let player: Celebrity = {  
+    name: 'Rohit Sharma', age: 30, profession: 'Cricket Player'  
+}  
+printName(player);
+
+*/
+
+/*
+3.0 Ambients : 
+//Ambient declarations files need to save with the extension (d.ts).
+A file with extension .d.ts must have the declare keyword prefixed to each root level definition.
+The Ambient declarations allow us to use existing popular JavaScript libraries safely.
+
+Additon.js //function of some library
+var TestSum;    
+(function (TestSum) {    
+   var Calc = (function () {   
+      function Calc() {   
+      }   
+      Calc.prototype.doSum = function (a, b) {  
+         return a + b;  
+      }  
+   })  
+})
+
+CalcSum.d.ts : Above is a JS file and we have not much time to re-write this library to TypeScript. But still, if we need to use the doSum() function with type safety
+ declare module TestSum1 {   
+   export class Calc {   
+      doSum(a:number, b:number) : number;   
+   }  
+} 
+*/
+
+/*
+4.0 Decorators : A Decorator is a special kind of declaration that can be applied to classes, methods, accessor, property, or parameter. Decorators are simply functions that are prefixed @expression symbol
+
+function f() {  
+    console.log("f(): evaluated");  
+    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {  
+        console.log("f(): called");  
+    }  
+}  
+  
+class Cafe {  
+    @f()  
+    method() {}  
+}
+
+*/
+
+/*
+5.0 Namespaces : Internal modules are called namespaces.
+//The namespace is a way which is used for logical grouping of functionalities. It encapsulates the features and objects that share common relationships. It allows us to organize our code in a much cleaner way.
+We can compile the namespace by using the "--outFile" command.
+In namespaces, we cannot re-export their features or rename it.
+
+//Main.ts
+/// <reference path = "CalcSum.d.ts" />   
+//var obj11 = new TestSum.Calc();   
+//console.log("Sum: " +obj.doSum(15,25)); 
+
+//Compile above code : tsc main.ts
+//Run above code : node main.js
+
+*/
+
+/*
+6.0 Type Compatibility in TypeScript
+Its is based on Structural Typing - Structural typing is a way of relating types based solely on their members. Since both Named and Person has same type as name, so its fine to work.
+interface Named {
+    name: string;
+}
+class Person {
+    name: string;
+}
+let p: Named;
+// OK, because of structural typing
+p = new Person();
+
+//Example : members of target type name is present, so it will not throw an error
+interface Named1 {
+    name: string;
+}
+let x: Named1;
+// y's inferred type is { name: string; location: string; }
+let y = { name: "Alice", location: "Seattle" };
+x = y;
+function greet(n: Named) {
+    console.log("Hello, " + n.name);
+}
+greet(x);
+
+//Comparing two functions
+let x11 = (a: number) => 0;
+let y1 = (b: number, s: string) => 0;
+y1=x11 // OK, every property of x11 is present in y1
+//x11=y1 // Error, every property of y1 is not present in x11
+
+//Function with overloads
+//Enum : Enum values from different Enum are consideeed as incompatible
+
+enum Status { Ready, Waiting };
+enum Color { Violet, Brown, Magenta };
+let status = Status.Ready;
+//status = Color.Green;  // Error
 
 */
 
