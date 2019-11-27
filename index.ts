@@ -325,23 +325,7 @@ for (let i of list) {
     console.log('For Of Example '+i); // "4", "5", "6"
 }
 
-//7.0 Modules : Enternal modules are called modules.
-//In TypeScript, just as in ECMAScript 2015, any file containing a top-level import or export is considered a module. Conversely, a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well)
-//We can compile the module by using the "--module" command.
-//In modules, we can re-export some of their features either using their original name or rename it.
 
-
-/*import { StringValidator } from "./namespaces/StringValidator";
-export const numberRegexp = /^[0-9]+$/;
-
-export class ZipCodeValidator implements StringValidator {
-    isAcceptable(s: string) {
-        return s.length === 5 && numberRegexp.test(s);
-    }
-}*/
-
-//7.1 export original module and but rename it :
-//export {ZipCodeValidator as RegExpBasedZipCodeValidator} from "./ZipCodeValidator";
 
 
 
@@ -499,6 +483,23 @@ In namespaces, we cannot re-export their features or rename it.
 //Compile above code : tsc main.ts
 //Run above code : node main.js
 
+Modules : Enternal modules are called modules.
+//In TypeScript, just as in ECMAScript 2015, any file containing a top-level import or export is considered a module. Conversely, a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well)
+We can compile the module by using the "--module" command.
+In modules, we can re-export some of their features either using their original name or rename it.
+
+
+import { StringValidator } from "./namespaces/StringValidator";
+export const numberRegexp = /^[0-9]+$/;
+
+export class ZipCodeValidator implements StringValidator {
+    isAcceptable(s: string) {
+        return s.length === 5 && numberRegexp.test(s);
+    }
+}
+
+//7.1 export original module and but rename it :
+//export {ZipCodeValidator as RegExpBasedZipCodeValidator} from "./ZipCodeValidator";
 
 
 Modules :
