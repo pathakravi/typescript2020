@@ -424,6 +424,7 @@ function displayDataType<T, U>(id:T, name:U): void {
 displayDataType<number, string>(101, "Abhishek")
 
 2.2 The generic type can also be used with the interface.
+*/
 interface People {  
     name: string  
     age: number  
@@ -439,7 +440,7 @@ let player: Celebrity = {
 }  
 printName(player);
 
-*/
+/*
 
 /*
 3.0 Ambients : 
